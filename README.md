@@ -4,9 +4,15 @@
 
 <img src="eosmem-day.png" alt="My cool logo"/>
 
-Version: early alpha
+##### Configuration:
+echo "[eosmem*]
+env.DATADIR /opt/EOSmainNet
+" >> greetings.txt
 
-Usage: just place plugin in /usr/share/munin/plugins/eosmem_
+where DATADIR path to your nodeos catalog with blocks and state catlogs
+
+##### Usage: 
+just place plugin in /usr/share/munin/plugins/eosmem_
 
 $ chmod 755 /usr/share/munin/plugins/eosmem_
 
