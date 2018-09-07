@@ -2,7 +2,7 @@
 
 ### Munin plugin to monitor EOS node (state db, blocks db) memory consumption
 
-<img src="eosmem.png" alt="My cool logo"/>
+<img src="eosmem.png" alt="munin screenshot"/>
 
 ##### Configuration:
 echo "[eosmem*]
