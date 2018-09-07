@@ -2,13 +2,20 @@
 
 ### Munin plugin to monitor EOS node (state db, blocks db) memory consumption
 
-<img src="eosmem-day.png" alt="My cool logo"/>
+<img src="eosmem.png" alt="munin screenshot"/>
 
-Version: early alpha
+##### Configuration:
+echo "[eosmem*]
 
-Usage: just place plugin in /usr/share/munin/plugins/eosmem_
+env.DATADIR /opt/EOSmainNet
+" >> /etc/munin/plugin-conf.d/eosmem
 
-$ chmod 755 /usr/share/munin/plugins/eosmem_
+where DATADIR path to your nodeos catalog with blocks and state catlogs
 
-$ ln -s /usr/share/munin/plugins/eosmem_ /etc/munin/plugins/eosmem
+##### Usage: 
+just place plugin in /usr/share/munin/plugins/eosmem
+
+$ chmod 755 /usr/share/munin/plugins/eosmem
+
+$ ln -s /usr/share/munin/plugins/eosmem /etc/munin/plugins/eosmem
 
