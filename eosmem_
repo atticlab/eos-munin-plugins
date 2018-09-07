@@ -1,0 +1,49 @@
+#!/bin/sh
+
+output_config() {
+    echo "graph_title EOS memory consumption"
+    echo "graph_category EOS"
+    echo "graph_args --base 1024"
+    echo "size.label Size of statedb file"
+    echo "usage.label Usage of statedb file"
+}
+
+output_values() {
+    printf "size.value %d\n" $(statedb_size)
+    printf "usage.value %d\n" $(statedb_usage)
+}
+
+statedb_size() {
+   ls -la /opt/EOSmainNet/state/shared_memory.bin | awk ' { print $5 } '
+}
+
+statedb_usage() {
+   du /opt/EOSmainNet/state/shared_memory.bin | awk '{print $1 * 1024}'
+}
+
+output_usage() {
+    printf >&2 "%s - munin plugin to graph EOS node memory consuption\n" ${0##*/}
+    printf >&2 "Usage: %s [config]\n" ${0##*/}
+}
+
+case $# in
+    0)  
+        output_values
+        ;;
+    1)  
+        case $1 in
+            config)
+                output_config
+                ;;
+            *)  
+                output_usage
+                exit 1
+                ;;
+        esac
+        ;;
+    *)  
+        output_usage
+        exit 1
+        ;;
+esac
+
