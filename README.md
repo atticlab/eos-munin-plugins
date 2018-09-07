@@ -1,7 +1,7 @@
 # eos-munin-plugin
 
 ### Munin plugin to monitor EOS node (state db, blocks db) memory consumption
-[Screenshot](eosmem-day.png)
+
 <img src="eosmem-day.png" alt="My cool logo"/>
 
 Version: early alpha
