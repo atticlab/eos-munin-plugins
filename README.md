@@ -11,6 +11,7 @@ env.DATADIR /opt/EOSmainNet
 " >> /etc/munin/plugin-conf.d/eosmem
 
 
+
 where DATADIR path to your nodeos catalog with blocks and state catlogs
 
 ##### Usage: 
