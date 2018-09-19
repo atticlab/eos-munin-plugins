@@ -1,0 +1,51 @@
+#!/bin/sh
+
+output_config() {
+    echo "graph_title EOS Chain"
+    echo "graph_category EOS"
+    echo "graph_args --base 1000"
+
+    echo "head_block_num.label Head block number"
+    echo "last_irreversible_block_num.label Last irreversible block num"
+}
+
+output_values() {
+    printf "head_block_num.value %d\n" $(head_block_num)
+    printf "last_irreversible_block_num.value %d\n" $(last_irreversible_block_num)
+}
+
+
+head_block_num() {
+   $DATADIR/cleos.sh get info | grep 'head_block_num'  | awk -F "," '{print $1}'| awk '{print $2}'
+}
+
+last_irreversible_block_num() {
+   $DATADIR/cleos.sh get info | grep 'last_irreversible_block_num'  | awk -F "," '{print $1}'| awk '{print $2}'
+}
+
+output_usage() {
+    printf >&2 "%s - munin plugin to graph EOS Chain\n" ${0##*/}
+    printf >&2 "Usage: %s [config]\n" ${0##*/}
+}
+
+case $# in
+    0)
+        output_values
+        ;;
+    1)
+        case $1 in
+            config)
+                output_config
+                ;;
+            *)
+                output_usage
+                exit 1
+                ;;
+        esac
+        ;;
+    *)
+        output_usage
+        exit 1
+        ;;
+esac
+

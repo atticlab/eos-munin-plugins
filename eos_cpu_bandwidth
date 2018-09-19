@@ -1,0 +1,69 @@
+#!/bin/sh                                                                                                                                                                                                                            [14/566]
+
+output_config() {
+    echo "graph_title EOS CPU bandwidth $ACCOUNT"
+    echo "graph_category EOS"
+
+    echo "staked.label Staked, EOS"
+    echo "delegated.label Delegated, EOS"
+    echo "used.label Used, sec"
+    echo "available.label Available, hr"
+    echo "limit.label Limit, hr"
+
+}
+
+output_values() {
+    printf "staked.value %d\n" $(staked_cpu_bandwidth)
+    printf "delegated.value %d\n" $(delegated_cpu_bandwidth)
+    printf "used.value %d\n" $(used_cpu_bandwidth)
+    printf "available.value %d\n" $(available_cpu_bandwidth)
+    printf "limit.value %d\n" $(limit_cpu_bandwidth)
+}
+
+
+staked_cpu_bandwidth() {
+   $DATADIR/cleos.sh get account $ACCOUNT | grep -A5 -B0 'cpu bandwidth' | grep 'staked:' | awk -F "." '{print $1}' | awk '{print $2}'
+}
+
+delegated_cpu_bandwidth() {
+   $DATADIR/cleos.sh get account $ACCOUNT | grep -A5 -B0 'cpu bandwidth' | grep 'delegated:' | awk -F "." '{print $1}' | awk '{print $2}'
+}
+
+used_cpu_bandwidth() {
+   $DATADIR/cleos.sh get account $ACCOUNT | grep -A5 -B0 'cpu bandwidth' | grep 'used:' | awk -F "." '{print $1}' | awk '{print $2}'
+}
+
+available_cpu_bandwidth() {
+   $DATADIR/cleos.sh get account $ACCOUNT | grep -A5 -B0 'cpu bandwidth' | grep 'available:' | awk -F "." '{print $1}' | awk '{print $2}'
+}
+
+limit_cpu_bandwidth() {
+   $DATADIR/cleos.sh get account $ACCOUNT | grep -A5 -B0 'cpu bandwidth' | grep 'limit:' | awk -F "." '{print $1}' | awk '{print $2}'
+}
+
+output_usage() {
+    printf >&2 "%s - munin plugin to graph EOS CPU bandwidth\n" ${0##*/}
+    printf >&2 "Usage: %s [config]\n" ${0##*/}
+}
+
+case $# in
+    0)
+        output_values
+        ;;
+    1)
+        case $1 in
+            config)
+                output_config
+                ;;
+            *)
+                output_usage
+                exit 1
+                ;;
+        esac
+        ;;
+    *)
+        output_usage
+        exit 1
+        ;;
+esac
+

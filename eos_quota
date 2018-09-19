@@ -1,0 +1,40 @@
+#!/bin/sh
+
+output_config() {
+    echo "graph_title EOS Memory quota"
+    echo "graph_category EOS"
+    echo "graph_args --base 1024"
+
+    echo "quota.label Quota"
+    echo "quota.draw AREA"
+}
+
+output_values() {
+    printf "quota.value %d\n" $(memory_quota)
+}
+
+memory_quota() {
+  $DATADIR/cleos.sh get account $ACCOUNT | grep -A1 -B0 'memory' | grep 'quota:' | awk -F "." '{print $1}' | awk '{print $2*1024}'
+}
+
+case $# in
+    0)
+        output_values
+        ;;
+    1)
+        case $1 in
+            config)
+                output_config
+                ;;
+            *)
+                output_usage
+                exit 1
+                ;;
+        esac
+        ;;
+    *)
+        output_usage
+        exit 1
+        ;;
+esac
+

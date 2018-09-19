@@ -31,15 +31,15 @@ statedb_size() {
 }
 
 statedb_usage() {
-   du $DATADIR/state/shared_memory.bin | awk '{print $1 * 1024}'
+   du  $DATADIR/state/shared_memory.bin | awk '{print $1 * 1024}'
 }
 
 blocksdb_size() {
-   ls -la $DATADIR/blocks/blocks.log | awk ' { print $5 } '
+   ls -la  $DATADIR/blocks/blocks.log | awk ' { print $5 } '
 }
 
 reversdb_size() {
-   ls -la $DATADIR/blocks/reversible/shared_memory.bin | awk ' { print $5 } '
+   ls -la  $DATADIR/blocks/reversible/shared_memory.bin | awk ' { print $5 } '
 }
 
 output_usage() {
@@ -67,3 +67,4 @@ case $# in
         exit 1
         ;;
 esac
+

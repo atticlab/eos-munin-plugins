@@ -1,0 +1,65 @@
+#!/bin/sh
+
+output_config() {
+    echo "graph_title EOS account balance $ACCOUNT (EOS)"
+    echo "graph_category EOS"
+
+    echo "total.label Total balance"
+    echo "total.draw AREA"
+
+    echo "liquid.label Liquid balance"
+    echo "staked.label Staked balance"
+    echo "unstaking.label Unstaking balance"
+
+}
+
+output_values() {
+    printf "liquid.value %d\n" $(liquid_balance)
+    printf "staked.value %d\n" $(staked_balance)
+    printf "unstaking.value %d\n" $(unstaking_balance)
+    printf "total.value %d\n" $(total_balance)
+}
+
+
+liquid_balance() {
+   $DATADIR/cleos.sh get account $ACCOUNT | grep -A2 -B0 'EOS balances' | grep liquid | awk -F "." '{print $1}' | awk '{print $2}'
+}
+
+staked_balance() {
+   $DATADIR/cleos.sh get account $ACCOUNT | grep -A2 -B0 'EOS balances' | grep staked | awk -F "." '{print $1}' | awk '{print $2}'
+}
+
+unstaking_balance() {
+   $DATADIR/cleos.sh get account $ACCOUNT | grep -A4 -B0 'EOS balances' | grep unstaking | awk -F "." '{print $1}' | awk '{print $2}'
+}
+
+total_balance() {
+   $DATADIR/cleos.sh get account $ACCOUNT | grep -A4 -B0 'EOS balances' | grep total | awk -F "." '{print $1}' | awk '{print $2}'
+}
+
+output_usage() {
+    printf >&2 "%s - munin plugin to graph EOS balance\n" ${0##*/}
+    printf >&2 "Usage: %s [config]\n" ${0##*/}
+}
+
+case $# in
+    0)
+        output_values
+        ;;
+    1)
+        case $1 in
+            config)
+                output_config
+                ;;
+            *)
+                output_usage
+                exit 1
+                ;;
+        esac
+        ;;
+    *)
+        output_usage
+        exit 1
+        ;;
+esac
+
