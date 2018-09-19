@@ -6,38 +6,38 @@
 
 ##### List of plugins: 
 
-#####Eos balance 
+##### Eos balance 
 Liquid
 Staked
 Unstaking
 Total
 
-#####Eos chain 
+##### Eos chain 
 Head block number
 Last irreversible block number
 
-#####Eos cpu bandwidth 
+##### Eos cpu bandwidth 
 Staked
 Delegated
 Used
 Available
 Limit
 
-#####Eos mem 
+##### Eos mem 
 Total RAM  
 Size of statedb database  
 Usage of state database  
 Size of blocks database  
 Size of reversible database  
 
-#####Eos net bandwidth 
+##### Eos net bandwidth 
 Staked  
 Delegated  
 Used  
 Available  
 Limit  
 
-#####Eos quota 
+##### Eos quota 
 Quota  
 
 ##### Configuration: 
