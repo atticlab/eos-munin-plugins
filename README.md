@@ -1,4 +1,4 @@
-### Set of munin plugins to monitor EOS node and related EOS account 
+### Set of Munin plugins to monitor EOS node and related EOS account 
 
 <img src="eosmem.png" alt="munin screenshot"/>
 
