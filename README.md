@@ -6,6 +6,8 @@ Example: http://junglebp.atticlab.net/ATTICLAB.NET/JUNGLEBP.ATTICLAB.NET/index.h
 
 ##### List of plugins: 
 eos_balance, eos_chain, eos_net, eos_cpu, eos_quota - account related plugins...
+
+
 eos_mem - EOS node memory consumption plugin
 
 ##### Configuration: 
