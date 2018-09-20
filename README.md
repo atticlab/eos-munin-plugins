@@ -19,11 +19,11 @@ env.DATADIR /opt/EOSmainNet
 ...
 where DATADIR path to your nodeos catalog with blocks and state catlogs
 
-##### Usage: 
-just place plugin in /usr/share/munin/plugins/eosmem
+##### Usage
+just place plugin in /usr/share/munin/plugins
 
-$ sudo chmod 755 /usr/share/munin/plugins/eosmem
+$ sudo chmod 755 /usr/share/munin/plugins/eos*
 
-$ sudo ln -s /usr/share/munin/plugins/eosmem /etc/munin/plugins/eosmem
+$ sudo ln -s /usr/share/munin/plugins/eos* /etc/munin/plugins/
 
 $ sudo service munin-node restart
