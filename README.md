@@ -14,7 +14,7 @@ eos_mem - EOS node memory consumption plugin
 echo "[eos_*]  
 env.ACCOUNT eosaccount  
 env.DATADIR /opt/EOSmainNet
-" >> /etc/munin/plugin-conf.d/eosmem
+" >> /etc/munin/plugin-conf.d/eos
 
 ...
 where DATADIR path to your nodeos catalog with blocks and state catlogs
