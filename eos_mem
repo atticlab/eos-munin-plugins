@@ -8,7 +8,7 @@ output_config() {
     echo "total.label Total RAM"
     echo "total.draw AREA"
 
-    echo "size.label Size of statedb database"
+    echo "size.label Size of state database"
     echo "usage.label Usage of state database"
     echo "blocks.label Size of blocks database"
     echo "revdb.label Size of reversible database"
