@@ -12,6 +12,7 @@ output_config() {
     echo "usage.label Usage of state database"
     echo "blocks.label Size of blocks database"
     echo "revdb.label Size of reversible database"
+    echo "revdb_usage.label Usage of reversible database"
 }
 
 output_values() {
@@ -20,6 +21,7 @@ output_values() {
     printf "usage.value %d\n" $(statedb_usage)
     printf "blocks.value %d\n" $(blocksdb_size)
     printf "revdb.value %d\n" $(reversdb_size)
+    printf "revdb_usage.value %d\n", $(reversdb_usage)
 }
 
 total_ram() {
@@ -41,6 +43,11 @@ blocksdb_size() {
 reversdb_size() {
    ls -la  $DATADIR/blocks/reversible/shared_memory.bin | awk ' { print $5 } '
 }
+
+reversdb_usage() {
+   du  $DATADIR/blocks/reversible/shared_memory.bin | awk '{ print $1 * 1024}'
+}
+
 
 output_usage() {
     printf >&2 "%s - munin plugin to graph EOS node memory consuption\n" ${0##*/}
